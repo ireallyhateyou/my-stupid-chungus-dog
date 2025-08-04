@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One more step - Security Check</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>my stupid chungus dog</title>
     <style>
         * {
             margin: 0;
@@ -13,689 +12,435 @@
         }
 
         body {
-            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-            background: white;
-            min-height: 100vh;
-            color: rgb(64, 64, 64);
-            font-size: 15px;
-            line-height: 1.5;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #1d1c21;
+            color: #333;
+            line-height: 1.6;
         }
 
-        .header-section {
-            margin: 0 auto;
-            margin-bottom: 30px;
-            margin-top: 35px;
-            width: 708px;
-        }
-
-        .header-title {
-            color: rgb(64, 64, 64);
-            font-size: 60px;
-            font-weight: 300;
-            line-height: 1.2;
-            margin: 0;
-        }
-
-        .header-subtitle {
-            color: rgb(153, 153, 153);
-            font-size: 30px;
-            font-weight: 300;
-            line-height: 1.3;
-            margin: 0;
-        }
-
-        .main-content {
-            background: rgb(235, 235, 235);
-            background-image: -webkit-linear-gradient(top, rgb(222, 222, 222) 0px, rgb(235, 235, 235) 3%, rgb(235, 235, 235) 97%, rgb(222, 222, 222) 100%);
-            margin-top: 30px;
-            padding: 60px 0;
-            overflow-x: hidden;
-        }
-
-        .content-container {
-            margin: 0 auto;
-            width: 708px;
-        }
-
-        .captcha-section {
-            display: flex;
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
             width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .captcha-left {
-            width: 50%;
-            padding-right: 22.5px;
-            float: left;
-        }
-
-        .captcha-right {
-            width: 50%;
-            padding-left: 22.5px;
-            float: left;
-        }
-
-        .captcha-container {
-            background: white;
-            border-radius: 2px;
-            padding: 15px;
-            margin-bottom: -60px;
-        }
-
-        .captcha {
-            font-family: Roboto, helvetica, arial, sans-serif;
-        }
-
-        .m-p {
-            margin: 0;
-            padding: 0;
-        }
-
-        .block {
-            display: block;
-        }
-
-        .checkbox-window {
-            height: 74px;
-            width: 300px;
-            background-color: #f9f9f9;
-            border-radius: 3px;
-            border: 1px solid #d3d3d3;
-        }
-
-        .checkbox-window a {
-            color: #555;
-            text-decoration: none;
-        }
-
-        .checkbox-window a:hover {
-            color: #555;
-            text-decoration: underline;
-        }
-
-        .checkbox-container {
-            width: 28px;
-            height: 28px;
-        }
-
-        .checkbox {
-            font-family: Roboto, helvetica, arial, sans-serif;
-            background-color: #fff;
-            border-radius: 2px;
-            height: 100%;
-            width: 100%;
-            border: 2px solid #c1c1c1;
-            margin: 21px 0 0 12px;
-            outline: 0;
-            transition: width .5s, height .5s, border-radius .5s, margin-top .5s, margin-left .5s, opacity .7s;
-        }
-
-        .checkbox:hover {
-            border: 2px solid #b2b2b2;
-        }
-
-        .im-not-a-robot {
-            position: relative;
-            left: 52px;
-            bottom: 3px;
-            font-size: 15px;
-            color: #282727;
-        }
-
-        .captcha-logo {
-            position: relative;
-            left: 244px;
-            bottom: 36px;
-            width: 40px;
-            height: 45px;
-            vertical-align: baseline;
-            padding-bottom: 4px;
-        }
-
-        .checkbox-desc {
-            position: relative;
-            color: #555;
-            font-size: 8px;
-            text-align: center;
-            bottom: 40px;
-            left: 112px;
-        }
-
-        .spinner {
-             position: relative;
-             top: -111px;
-             left: 12px;
-             height: 30px;
-             width: 30px;
-             border: 3px solid rgba(0,0,0,.1);
-             border-top: 3px solid #333;
-             border-radius: 50%;
-             transition: opacity .5s linear;
-             animation: 1s linear infinite spin;
-             opacity: 0;
-             visibility: hidden;
-         }
-
-        @keyframes spin {
-            0% { transform: rotate(0); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .verify-window {
-            position: absolute;
-            margin: auto;
-            width: 312px;
-            border: 1px solid #cecece;
-            box-shadow: 5px 6px 7px -3px rgba(0,0,0,.12);
-            transition: opacity .4s;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .verify-header {
-            background-color: #1a73e8;
-            padding: 16px 16px 24px;
-            color: #fff;
-        }
-
-        .verify-header-text-small {
-            font-size: 14px;
-            line-height: normal;
-        }
-
-        .verify-header-text-medium {
-            font-size: 16px;
-        }
-
-        .verify-header-text-big {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .verify-main {
-            padding: 5px;
-            color: #111;
-            font-size: 13px;
-        }
-
-        .captcha-img {
-             width: 100%;
-             height: 100px;
-             object-fit: cover;
-             cursor: pointer;
-             border: 2px solid transparent;
-             transition: border-color 0.2s ease, transform 0.2s ease;
-             position: relative;
-             aspect-ratio: 1;
-         }
-
-         .captcha-img:hover {
-             border-color: #1a73e8;
-         }
-
-         .captcha-img.selected {
-             transform: scale(0.7);
-             transition: transform 0.2s ease;
-         }
-
-        .image-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .checkmark-overlay {
-            position: absolute;
-            top: 5px !important;
-            left: 5px !important;
-            right: auto !important;
-            width: 20px;
-            height: 20px;
-            z-index: 10;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .image-container.selected .checkmark-overlay {
-            opacity: 1;
-        }
-
-        .verify-footer {
-            border-top: 1px solid #cecece;
-            padding: 10px 7px;
-            color: #737373;
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            padding: 0 2rem;
         }
 
-        .verify-footer-left {
-            padding: 5px;
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #764ba2;
         }
 
-        .verify-verify-button {
-            text-transform: uppercase;
-            background-color: #5a89e2;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #764ba2;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            background: #1d1c21;
+            margin: 2rem auto;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: glow 3s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes glow {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(1.1) rotate(180deg);
+                opacity: 0.7;
+            }
+        }
+
+        .deven-message {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            background: #1d1c21;
+            padding: 20px;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 40px rgba(255, 255, 255, 0.2),
+                0 0 60px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: messageGlow 2s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
+            object-fit: contain;
+        }
+
+        @keyframes messageGlow {
+            0% {
+                box-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.3),
+                    0 0 40px rgba(255, 255, 255, 0.2),
+                    0 0 60px rgba(255, 255, 255, 0.1);
+            }
+            100% {
+                box-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.5),
+                    0 0 60px rgba(255, 255, 255, 0.4),
+                    0 0 90px rgba(255, 255, 255, 0.3),
+                    0 0 120px rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .deven-message:hover {
+            transform: scale(1.02);
+            animation: messageGlowHover 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes messageGlowHover {
+            0% {
+                box-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.6),
+                    0 0 60px rgba(255, 255, 255, 0.5),
+                    0 0 90px rgba(255, 255, 255, 0.4),
+                    0 0 120px rgba(255, 255, 255, 0.3);
+            }
+            100% {
+                box-shadow: 
+                    0 0 40px rgba(255, 255, 255, 0.8),
+                    0 0 80px rgba(255, 255, 255, 0.6),
+                    0 0 120px rgba(255, 255, 255, 0.5),
+                    0 0 160px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        .perspective-section {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .perspective-container {
+            position: relative;
+            perspective: 1000px;
+            z-index: 2;
+        }
+
+        .perspective-text {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 40px rgba(255, 255, 255, 0.3),
+                0 0 60px rgba(255, 255, 255, 0.2);
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            white-space: nowrap;
+        }
+
+        .pako-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        .about {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 3rem;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #764ba2;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 3rem;
+        }
+
+        .gallery h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #764ba2;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        footer {
+            background: #333;
             color: #fff;
             text-align: center;
-            width: 100%;
-            padding: 12px 0;
-            text-decoration: none;
-            font-weight: 600;
-            height: min-content;
-            border-radius: 3px;
-            font-size: 14px;
-            border: none;
-            outline: 0;
-            cursor: not-allowed;
+            padding: 2rem;
+            margin-top: 2rem;
         }
 
-        .verify-verify-button:enabled {
-            background-color: #1a73e8;
-            cursor: pointer;
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .perspective-text {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
         }
 
-        .verify-verify-button:enabled:hover {
-            background-color: #1557b0;
-        }
-
-        .footer-section {
-            margin: 30px auto;
-            width: 708px;
-        }
-
-        .footer-content {
-            display: flex;
-            width: 100%;
-        }
-
-        .footer-left {
-            width: 50%;
-            padding-right: 22.5px;
-            float: left;
-        }
-
-        .footer-right {
-            width: 50%;
-            padding-left: 22.5px;
-            float: left;
-        }
-
-        .footer-title {
-            color: rgb(64, 64, 64);
-            font-size: 30px;
-            font-weight: 400;
-            line-height: 1.3;
-            margin: 0;
-        }
-
-        .footer-text {
-            color: rgb(64, 64, 64);
-            font-size: 15px;
-            line-height: 22.5px;
-            margin-top: 15px;
-        }
-
-        .footer-text + .footer-text {
-            margin-top: 22.5px;
-        }
-
-        .bottom-footer {
-            border-top: 1px solid rgb(235, 235, 235);
-            margin: 0 auto;
-            padding: 40px 0;
-            text-align: center;
-            width: 708px;
-        }
-
-        .clearfix::after {
-            content: "";
-            display: table;
-            clear: both;
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .perspective-text {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header-section">
-        <h1 class="header-title">One more step</h1>
-        <h2 class="header-subtitle">
-            <span>Please complete the security check to see my stupid chungus dog</span>
-        </h2>
-    </div>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">dog</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="main-content">
-        <div class="content-container">
-            <div class="captcha-section clearfix">
-                <div class="captcha-left">
-                    <div class="captcha-container">
-                        <div class="captcha">
-                            <div id="checkbox-window" class="checkbox-window m-p block">
-                                <div class="checkbox-container m-p">
-                                    <button type="button" id="checkbox" class="checkbox m-p"></button>
-                                </div>
-                                <p class="im-not-a-robot m-p">I'm not a dog</p>
-                                                                 <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" class="captcha-logo" alt="">
-                                <br>
-                                <p class="checkbox-desc m-p"><a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> - <a href="https://www.google.com/intl/en/policies/terms/">Terms</a></p>
-                                <img class="spinner" alt="" id="spinner">
-                            </div>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <img src="assets/deven message.png" alt="Deven's message about making a site for Pako" class="deven-message">
+        </section>
 
-                            <div id="verify-window" class="verify-window">
-                                <div class="verify-container m-1">
-                                    <header class="verify-header">
-                                        <span class="verify-header-text-medium m-p block">Select all images with</span>
-                                        <span class="verify-header-text-big m-p block">my stupid chungus dog</span>
-                                        <span class="verify-header-text-medium m-p block"></span>
-                                    </header>
-                                                                         <main class="verify-main m-2">
-                                         <div class="grid grid-cols-3 gap-0">
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1547407139-3c921a66005c?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1543852786-1cf6624b998d?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1507146426996-ef05306b0a7e?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                             <div class="p-0">
-                                                 <div class="image-container">
-                                                     <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=300&h=300&fit=crop" class="captcha-img" />
-                                                     <img src="assets/checkmark.png" class="checkmark-overlay" alt="✓" />
-                                                 </div>
-                                             </div>
-                                         </div>
-                                    </main>
-                                </div>
-                                <footer class="verify-container verify-footer">
-                                    <div class="verify-footer-left">&nbsp;</div>
-                                    <button type="button" class="verify-verify-button w-24" id="verify-verify-button" disabled="true">Verify</button>
-                                </footer>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="captcha-right">
-                    <div style="background-repeat:no-repeat;-webkit-background-clip:border-box;font-family:&quot;Open Sans&quot;, Helvetica, Arial, sans-serif;font-size:15px;font-stretch:100%;font-style:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:400;background-attachment:scroll;background-clip:border-box;background-color:rgb(255, 255, 255);background-image:url('assets/image1.png');background-origin:padding-box;background-position-x:0%;background-position-y:0%;background-size:auto;border-bottom-color:rgb(64, 64, 64);border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-bottom-style:none;border-bottom-width:0px;border-image-outset:0px;border-image-repeat:stretch;border-image-slice:100%;border-image-source:none;border-image-width:1;border-left-color:rgb(64, 64, 64);border-left-style:none;border-left-width:0px;border-right-color:rgb(64, 64, 64);border-right-style:none;border-right-width:0px;border-top-color:rgb(64, 64, 64);border-top-left-radius:5px;border-top-right-radius:5px;border-top-style:none;border-top-width:0px;display:block;height:400px;line-height:22.5px;margin-bottom:-60px;margin-left:0px;margin-right:0px;margin-top:0px;max-height:400px;max-width:none;overflow-x:hidden;overflow-y:hidden;padding-bottom:0px;padding-left:0px;padding-right:0px;padding-top:53px;text-decoration-color:rgb(64, 64, 64);text-decoration-line:none;text-decoration-style:solid;vertical-align:baseline;width:960px">
-                        <span style="background-repeat:repeat;-webkit-background-clip:border-box;font-family:&quot;Open Sans&quot;, Helvetica, Arial, sans-serif;font-size:15px;font-stretch:100%;font-style:normal;font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-weight:400;background-attachment:scroll;background-clip:border-box;background-color:rgba(0, 0, 0, 0);background-image:url('assets/image2.png');background-origin:padding-box;background-position-x:0px;background-position-y:-175px;background-size:auto;border-bottom-color:rgb(64, 64, 64);border-bottom-style:none;border-bottom-width:0px;border-image-outset:0px;border-image-repeat:stretch;border-image-slice:100%;border-image-source:none;border-image-width:1;border-left-color:rgb(64, 64, 64);border-left-style:none;border-left-width:0px;border-right-color:rgb(64, 64, 64);border-right-style:none;border-right-width:0px;border-top-color:rgb(64, 64, 64);border-top-style:none;border-top-width:0px;display:block;height:158px;left:240px;line-height:22.5px;margin-bottom:0px;margin-left:0px;margin-right:0px;margin-top:-79px;overflow-x:hidden;overflow-y:hidden;padding-bottom:0px;padding-left:0px;padding-right:0px;padding-top:0px;position:relative;text-decoration-color:rgb(64, 64, 64);text-decoration-line:none;text-decoration-style:solid;top:200px;vertical-align:baseline;width:178px"></span>
-                    </div>
-                </div>
+        <!-- Perspective Text Section -->
+        <section class="perspective-section">
+            <img src="assets/pako glow.jpg" alt="Pako glowing" class="pako-image">
+            <div class="perspective-container">
+                <div class="perspective-text" id="perspectiveText">my stupid dog</div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="footer-section">
-        <div class="footer-content clearfix">
-            <div class="footer-left">
-                <h2 class="footer-title">Why do I have to complete a CAPTCHA?</h2>
-                <div class="footer-text">
-                    Completing the CAPTCHA proves you are a human and gives you temporary access to the web property.
+        <!-- About Section -->
+        <section id="about" class="about">
+            <h2>about my dog</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>my dog is the goat :</p>
+                    <ul style="margin: 1rem 0; padding-left: 2rem;">
+                        <li>a</li>
+                        <li>bbb</li>
+                        <li>ccc</li>
+                        <li>ddd </li>
+                        <li>eeee</li>
+                    </ul>
+                    <p>qsdsdfdsfqsdf</p>
                 </div>
+                <img src="assets/pako1.JPG" alt="Pako being cute" class="about-image">
             </div>
-            <div class="footer-right">
-                <h2 class="footer-title">What can I do to prevent this in the future?</h2>
-                <div class="footer-text">
-                    If you are on a personal connection, like at home, you can run an anti-virus scan on your device to make sure it is not infected with malware.
-                </div>
-                <div class="footer-text">
-                    If you are at an office or shared network, you can ask the network administrator to run a scan across the network looking for misconfigured or infected devices.
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <div class="bottom-footer">
-        <!-- Empty footer to match the layout -->
-    </div>
+     <footer>
+        <p>qsdfqfqsdfdqsf</p>
+    </footer>
 
     <script>
-        let checkboxWindow = document.getElementById("checkbox-window");
-        let checkboxBtn = document.getElementById("checkbox");
-        let checkboxBtnSpinner = document.getElementById("spinner");
-        let verifywindow = document.getElementById("verify-window");
-        let selectedImages = new Set();
-
-                 // Dog images
-         const dogImages = [
-             'assets/pako1.JPG',
-             'assets/pako2.JPG',
-             'assets/pako3.JPG',
-             'assets/pako4.JPG',
-             'assets/pako5.JPG',
-             'assets/pako6.JPG'
-         ];
-
-                                       // Non-dog images
-           const nonDogImages = [
-               'https://picsum.photos/300/300?random=1',
-               'https://picsum.photos/300/300?random=2',
-               'https://picsum.photos/300/300?random=3',
-               'https://picsum.photos/300/300?random=4',
-               'https://picsum.photos/300/300?random=5',
-               'https://picsum.photos/300/300?random=6'
-           ];
-
-        function addCaptchaListeners() {
-            if (checkboxBtn) {
-                document.addEventListener("click", function (event) {
-                    let path = event.composedPath();
-                    if (!path.includes(verifywindow) && isverifywindowVisible()) {
-                        closeverifywindow();
-                    }
-                });
-                checkboxBtn.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    checkboxBtn.disabled = true;
-                    regenerateImages();
-                    runClickedCheckboxEffects();
-                });
-            }
-        }
-
-        function regenerateImages() {
-            const shuffledDogs = shuffleArray([...dogImages]).slice(0, 3);
-            const shuffledNonDogs = shuffleArray([...nonDogImages]).slice(0, 6);
-            const allImages = shuffleArray([...shuffledDogs, ...shuffledNonDogs]);
+        const text = document.getElementById('perspectiveText');
+        
+        document.addEventListener('mousemove', (e) => {
+            // Get mouse position relative to center of screen
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
             
-            document.querySelectorAll('.captcha-img').forEach((element, index) => {
-                const container = element.parentElement;
-                element.src = allImages[index];
-                element.classList.remove('selected');
-                container.classList.remove('selected');
-                element.onclick = () => toggleImageSelection(element, index);
-            });
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
             
-            selectedImages.clear();
-            updateVerifyButton();
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
-
-        function toggleImageSelection(element, index) {
-            const container = element.parentElement;
+            // Calculate rotation values based on mouse position
+            // Normalize to reasonable rotation values
+            const rotateY = (mouseX / centerX) * 25; // Max 25 degrees
+            const rotateX = -(mouseY / centerY) * 25; // Max 25 degrees, inverted
             
-            if (selectedImages.has(index)) {
-                selectedImages.delete(index);
-                element.classList.remove('selected');
-                container.classList.remove('selected');
-            } else {
-                selectedImages.add(index);
-                element.classList.add('selected');
-                container.classList.add('selected');
-            }
-            updateVerifyButton();
-        }
-
-        function updateVerifyButton() {
-            const verifyButton = document.getElementById('verify-verify-button');
-            if (selectedImages.size > 0) {
-                verifyButton.disabled = false;
-                verifyButton.onclick = verifySelection;
-            } else {
-                verifyButton.disabled = true;
-            }
-        }
-
-        function verifySelection() {
-            const selectedIndices = Array.from(selectedImages);
-            const dogIndices = [];
+            // Calculate translation for parallax effect
+            const translateX = (mouseX / centerX) * 20; // Max 20px movement
+            const translateY = (mouseY / centerY) * 20; // Max 20px movement
             
-            // Find which indices correspond to dog images
-            document.querySelectorAll('.captcha-img').forEach((element, index) => {
-                if (dogImages.includes(element.src)) {
-                    dogIndices.push(index);
-                }
-            });
-
-            // Check if all dogs are selected and no non-dogs are selected
-            const allDogsSelected = dogIndices.every(index => selectedIndices.includes(index));
-            const noNonDogsSelected = selectedIndices.every(index => dogIndices.includes(index));
-
-            if (allDogsSelected && noNonDogsSelected) {
-                alert('✅ Success! You\'re definitely human!');
-                closeverifywindow();
-            } else {
-                alert('❌ Try again! Make sure you selected all the dogs.');
-                regenerateImages();
-            }
-        }
-
-        function runClickedCheckboxEffects() {
-            hideCaptchaCheckbox();
-            setTimeout(function(){
-                showCaptchaLoading();
-            },500);
-            setTimeout(function(){
-                showVerifyWindow();
-            },900)
-        }
-
-        function showCaptchaLoading() {
-            checkboxBtnSpinner.style.visibility = "visible";
-            checkboxBtnSpinner.style.opacity = "1";
-            checkboxBtnSpinner.style.animation = "spin 1s linear infinite";
-        }
-
-        function hideCaptchaLoading() {
-            checkboxBtnSpinner.style.opacity = "0";
-            checkboxBtnSpinner.style.animation = "none";
-            setTimeout(function() {
-                checkboxBtnSpinner.style.visibility = "hidden";
-            }, 500);
-        }
-
-        function hideCaptchaCheckbox() {
-            checkboxBtn.style.visibility = "hidden";
-            checkboxBtn.style.opacity = "0";
-        }
-
-        function showCaptchaCheckbox() {
-            checkboxBtn.style.width = "100%";
-            checkboxBtn.style.height = "100%";
-            checkboxBtn.style.borderRadius = "2px";
-            checkboxBtn.style.margin = "21px 0 0 12px";
-            checkboxBtn.style.opacity = "1";
-        }
-
-        function hideCaptchaCheckbox() {
-            checkboxBtn.style.width = "4px";
-            checkboxBtn.style.height = "4px";
-            checkboxBtn.style.borderRadius = "50%";
-            checkboxBtn.style.marginLeft = "25px";
-            checkboxBtn.style.marginTop = "33px";
-            checkboxBtn.style.opacity = "0";
-        }
-
-        function showCaptchaLoading() {
-            checkboxBtnSpinner.style.visibility = "visible";
-            checkboxBtnSpinner.style.opacity = "1";
-        }
-
-        function hideCaptchaLoading() {
-            checkboxBtnSpinner.style.visibility = "hidden";
-            checkboxBtnSpinner.style.opacity = "0";
-        }
-
-        function closeverifywindow() {
-            verifywindow.style.display = "none";
-            verifywindow.style.visibility = "hidden";
-            verifywindow.style.opacity = "0";
-
-            showCaptchaCheckbox();
-            hideCaptchaLoading();
-            checkboxBtn.disabled = false;
-        }
-
-        function isverifywindowVisible() {
-            return verifywindow.style.display !== "none" && verifywindow.style.display !== "";
-        }
-
-        function showVerifyWindow() {
-            verifywindow.style.display = "block";
-            verifywindow.style.visibility = "visible";
-            verifywindow.style.opacity = "1";
-            verifywindow.style.top = checkboxWindow.offsetTop - 80 + "px";
-            verifywindow.style.left =  checkboxWindow.offsetLeft + 54 + "px";
-
-            if (verifywindow.offsetTop < 5) {
-               verifywindow.style.top = "5px";
-            }
-
-            if (verifywindow.offsetLeft + verifywindow.offsetWidth > window.innerWidth-10 ) {
-               verifywindow.style.left =  checkboxWindow.offsetLeft - 8  + "px";
-            }
-        }
-
-        // Initialize image click handlers
-        document.querySelectorAll('.captcha-img').forEach((element, index) => {
-            element.onclick = () => toggleImageSelection(element, index);
+            // Apply transformations
+            text.style.transform = `
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg) 
+                translateX(${translateX}px) 
+                translateY(${translateY}px)
+                translateZ(0)
+            `;
+            
+            // Add some scaling effect for depth
+            const distance = Math.sqrt(mouseX * mouseX + mouseY * mouseY);
+            const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+            const scale = 1 + (distance / maxDistance) * 0.1;
+            
+            text.style.transform += ` scale(${scale})`;
         });
 
-        addCaptchaListeners();
+        // Reset position when mouse leaves the window
+        document.addEventListener('mouseleave', () => {
+            text.style.transform = 'rotateX(0deg) rotateY(0deg) translateX(0px) translateY(0px) translateZ(0) scale(1)';
+        });
+
+        // Handle touch events for mobile
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            const touchX = touch.clientX - centerX;
+            const touchY = touch.clientY - centerY;
+            
+            const rotateY = (touchX / centerX) * 25;
+            const rotateX = -(touchY / centerY) * 25;
+            
+            const translateX = (touchX / centerX) * 20;
+            const translateY = (touchY / centerY) * 20;
+            
+            text.style.transform = `
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg) 
+                translateX(${translateX}px) 
+                translateY(${translateY}px)
+                translateZ(0)
+            `;
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
-</html> 
+</html>
