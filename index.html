@@ -94,11 +94,11 @@
 
         @keyframes glow {
             0% {
-                transform: scale(1) rotate(0deg);
+                transform: scale(1);
                 opacity: 0.3;
             }
             100% {
-                transform: scale(1.1) rotate(180deg);
+                transform: scale(1.1);
                 opacity: 0.7;
             }
         }
@@ -230,6 +230,54 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
+        .sister-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 3rem;
+        }
+
+        .sister-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #764ba2;
+        }
+
+        .sister-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .sister-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .sister-main-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .sister-drawing {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sister-images {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .gallery {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
@@ -309,26 +357,19 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <nav>
-            <div class="logo">dog</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="logo">
+                <img src="assets/sis drawing polished.png" alt="Sis drawing polished" style="height: 40px; width: auto;">
+            </div>
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="home" class="hero">
             <img src="assets/deven message.png" alt="Deven's message about making a site for Pako" class="deven-message">
         </section>
 
-        <!-- Perspective Text Section -->
         <section class="perspective-section">
             <img src="assets/pako glow.jpg" alt="Pako glowing" class="pako-image">
             <div class="perspective-container">
@@ -336,28 +377,40 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="about">
             <h2>about my dog</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>my dog is the goat :</p>
+                    <p>here are some facts :</p>
                     <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li>a</li>
-                        <li>bbb</li>
-                        <li>ccc</li>
-                        <li>ddd </li>
-                        <li>eeee</li>
+                        <li>its a german shepahrd<li>
+                        <li>its is like a year old</li>
+                        <li>its dream is to kill a seagull</li>
+                        <li>it loves all peoples and animals</li>
+                        <li>it just eats things</li>
                     </ul>
-                    <p>qsdsdfdsfqsdf</p>
+                    <p>I hope you love my dog as much as I do</p>
                 </div>
                 <img src="assets/pako1.JPG" alt="Pako being cute" class="about-image">
+            </div>
+        </section>
+
+        <section id="sister" class="sister-section">
+            <h2>shoutout to my sister</h2>
+            <div class="sister-content">
+                <div class="sister-text">
+                    <p>my sister drew this picture</p>
+                </div>
+                <div class="sister-images">
+                    <img src="assets/sister.jpg" alt="Sister's artwork" class="sister-main-image">
+                    <img src="assets/sis drawing.png" alt="Sister's drawing" class="sister-drawing">
+                </div>
             </div>
         </section>
     </main>
 
      <footer>
-        <p>qsdfqfqsdfdqsf</p>
+        <p>shoutout to my dog</p>
     </footer>
 
     <script>

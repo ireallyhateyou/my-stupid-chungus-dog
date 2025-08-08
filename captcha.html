@@ -635,12 +635,12 @@
             const noNonDogsSelected = selectedIndices.every(index => dogIndices.includes(index));
 
             if (allDogsSelected && noNonDogsSelected) {
-                showFeedback('✅ Success! You\'re definitely human!', 'success');
+                showFeedback('You are not a dog', 'success');
                 setTimeout(() => {
                     closeVerifyWindow();
                 }, 2000);
             } else {
-                showFeedback('❌ Try again! Make sure you selected all the dogs.', 'error');
+                showFeedback('Are you a dog?', 'error');
                 setTimeout(() => {
                     regenerateImages();
                 }, 2000);
