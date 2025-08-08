@@ -105,6 +105,7 @@
 
         .deven-message {
             width: 100%;
+            max-width: 500px;
             height: auto;
             border-radius: 15px;
             background: #1d1c21;
@@ -244,15 +245,23 @@
         }
 
         .sister-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 2rem;
-            align-items: start;
+        }
+
+        .sister-images {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
         }
 
         .sister-text {
             font-size: 1.1rem;
             margin-bottom: 1rem;
+            text-align: center;
         }
 
         .sister-main-image {
@@ -261,6 +270,19 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 1rem;
+        }
+
+        .sister-drawing {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sister-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
 
         .sister-drawing {
@@ -276,6 +298,151 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .age-guess-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 2rem auto;
+            padding: 3rem;
+        }
+
+        .age-guess-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #764ba2;
+            text-align: center;
+        }
+
+        .age-guess-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .age-guess-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .age-guess-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .age-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            max-width: 500px;
+        }
+
+        .age-option {
+            padding: 1rem;
+            border: 2px solid #764ba2;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .age-option:hover {
+            background: #764ba2;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .age-option.correct {
+            background: #34a853;
+            color: white;
+            border-color: #34a853;
+        }
+
+        .age-option.wrong {
+            background: #ea4335;
+            color: white;
+            border-color: #ea4335;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #34a853;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .modal-close {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 9999;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         .gallery {
@@ -360,18 +527,18 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="assets/sis drawing polished.png" alt="Sis drawing polished" style="height: 40px; width: auto;">
+                <img src="assets/sis drawing polished.png" alt="drawing of my dog" style="height: 40px; width: auto;">
             </div>
         </nav>
     </header>
 
     <main>
         <section id="home" class="hero">
-            <img src="assets/deven message.png" alt="Deven's message about making a site for Pako" class="deven-message">
+            <img src="assets/deven message.png" alt="message" class="deven-message">
         </section>
 
         <section class="perspective-section">
-            <img src="assets/pako glow.jpg" alt="Pako glowing" class="pako-image">
+            <img src="assets/pako glow.jpg" alt="my dog glows in the dark?" class="pako-image">
             <div class="perspective-container">
                 <div class="perspective-text" id="perspectiveText">my stupid dog</div>
             </div>
@@ -383,27 +550,54 @@
                 <div class="about-text">
                     <p>here are some facts :</p>
                     <ul style="margin: 1rem 0; padding-left: 2rem;">
-                        <li>its a german shepahrd<li>
+                        <li>its a german shepahrd</li>
+                        <li>born Sep 17, 2023</li>
                         <li>its is like a year old</li>
                         <li>its dream is to kill a seagull</li>
                         <li>it loves all peoples and animals</li>
                         <li>it just eats things</li>
+                        <li>its a good boy</li>
+                        <li>dont inquire on its gender</li>
+                        <li>it cant see the colour red lmaoooo</li>
                     </ul>
                     <p>I hope you love my dog as much as I do</p>
                 </div>
-                <img src="assets/pako1.JPG" alt="Pako being cute" class="about-image">
+                <img src="assets/pako1.JPG" alt="dogs cant drink coffee dumbass" class="about-image">
             </div>
         </section>
 
+        <!-- Age Guess Section -->
+        <section id="age-guess" class="age-guess-section">
+            <h2>guess my dog's age</h2>
+            <div class="age-guess-content">
+                <img src="assets/doglove.jpg" alt="My dog" class="age-guess-image">
+                <div class="age-guess-text">
+                    <p>How old do you think my dog is in this picture?</p
+                    <div class="age-options">
+                        <div class="age-option" data-age="1">1 month</div>
+                        <div class="age-option" data-age="2">2 months</div>
+                        <div class="age-option" data-age="11">11 months and 7 days</div>
+                        <div class="age-option" data-age="12">1 year</div>
+                        <div class="age-option" data-age="120">10 years</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sister Section -->
         <section id="sister" class="sister-section">
             <h2>shoutout to my sister</h2>
             <div class="sister-content">
                 <div class="sister-text">
                     <p>my sister drew this picture</p>
+
+                    <p><a href="/captcha.html" style="color: #764ba2; text-decoration: underline;">Please look at the captcha i made but scrapped because it was too corny</a></p>
                 </div>
                 <div class="sister-images">
-                    <img src="assets/sister.jpg" alt="Sister's artwork" class="sister-main-image">
-                    <img src="assets/sis drawing.png" alt="Sister's drawing" class="sister-drawing">
+                    <img src="assets/sister.jpg" alt="sister" class="sister-main-image">
+                    <div class="sister-drawing">
+                        <img src="assets/sis drawing.png" alt="Sister's drawing" style="width: 100%; max-width: 300px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); display: block; margin: 0 auto;">
+                    </div>
                 </div>
             </div>
         </section>
@@ -412,6 +606,14 @@
      <footer>
         <p>shoutout to my dog</p>
     </footer>
+
+    <div id="age-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title" id="modal-title"></div>
+            <div class="modal-text" id="modal-text"></div>
+            <button class="modal-close" onclick="closeModal()">Close</button>
+        </div>
+    </div>
 
     <script>
         const text = document.getElementById('perspectiveText');
@@ -493,6 +695,63 @@
                     });
                 }
             });
+        });
+
+        // Age guessing game functionality
+        document.querySelectorAll('.age-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedAge = this.getAttribute('data-age');
+                const isCorrect = selectedAge === '11';
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                    createConfetti();
+                    showModal('Good job!', 'You must be a genius!');
+                } else {
+                    this.classList.add('wrong');
+                    showModal('Wrong!', 'Come on bruh.');
+                }
+                
+                // Disable all options after selection
+                document.querySelectorAll('.age-option').forEach(opt => {
+                    opt.style.pointerEvents = 'none';
+                });
+            });
+        });
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 6000);
+            }
+        }
+
+        function showModal(title, text) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-text').textContent = text;
+            document.getElementById('age-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('age-modal').classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('age-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
         });
     </script>
 </body>
