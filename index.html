@@ -335,11 +335,12 @@
         }
 
         .age-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
             margin-top: 1rem;
-            max-width: 500px;
+            max-width: 800px;
+            justify-content: center;
         }
 
         .age-option {
@@ -352,6 +353,8 @@
             text-align: center;
             font-weight: bold;
             color: #764ba2;
+            flex: 0 1 auto;
+            min-width: 120px;
         }
 
         .age-option:hover {
@@ -370,6 +373,25 @@
             background: #ea4335;
             color: white;
             border-color: #ea4335;
+        }
+
+        .new-pic-btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .new-pic-btn:hover {
+            background: #5a3a7a;
+            transform: scale(1.05);
         }
 
         .modal {
@@ -432,11 +454,12 @@
             background: #ff6b6b;
             animation: confetti-fall 3s linear forwards;
             z-index: 9999;
+            top: -10px;
         }
 
         @keyframes confetti-fall {
             0% {
-                transform: translateY(-100vh) rotate(0deg);
+                transform: translateY(0) rotate(0deg);
                 opacity: 1;
             }
             100% {
@@ -510,6 +533,17 @@
             .gallery-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
+
+            .age-options {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 500px;
+            }
+
+            .age-option {
+                flex: none;
+                min-width: auto;
+            }
         }
 
         @media (max-width: 480px) {
@@ -566,19 +600,15 @@
             </div>
         </section>
 
-        <!-- Age Guess Section -->
         <section id="age-guess" class="age-guess-section">
             <h2>guess my dog's age</h2>
             <div class="age-guess-content">
-                <img src="assets/doglove.jpg" alt="My dog" class="age-guess-image">
+                <img src="assets/doglove.jpg" alt="My dog" class="age-guess-image" id="age-guess-image">
                 <div class="age-guess-text">
-                    <p>How old do you think my dog is in this picture?</p
+                    <p>How old do you think my dog is in this picture?</p>
+                    <button class="new-pic-btn" onclick="changePicture()">Get a new picture of my dog</button>
                     <div class="age-options">
-                        <div class="age-option" data-age="1">1 month</div>
-                        <div class="age-option" data-age="2">2 months</div>
-                        <div class="age-option" data-age="11">11 months and 7 days</div>
-                        <div class="age-option" data-age="12">1 year</div>
-                        <div class="age-option" data-age="120">10 years</div>
+                        <!-- Age options will be generated dynamically by JavaScript -->
                     </div>
                 </div>
             </div>
@@ -590,8 +620,7 @@
             <div class="sister-content">
                 <div class="sister-text">
                     <p>my sister drew this picture</p>
-
-                    <p><a href="/captcha.html" style="color: #764ba2; text-decoration: underline;">Please look at the captcha i made but scrapped because it was too corny</a></p>
+                    
                 </div>
                 <div class="sister-images">
                     <img src="assets/sister.jpg" alt="sister" class="sister-main-image">
@@ -599,6 +628,65 @@
                         <img src="assets/sis drawing.png" alt="Sister's drawing" style="width: 100%; max-width: 300px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); display: block; margin: 0 auto;">
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="contact" class="about contact-section">
+            <h2>contact dog</h2>
+            <div class="about-content contact-content">
+                <form id="contact-form" class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-row">
+                        <input type="text" name="name" placeholder="your name" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="email" name="email" placeholder="your email" required>
+                    </div>
+                    <div class="form-row">
+                        <textarea name="message" rows="5" placeholder="your message" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="contact-captcha">
+                            <div id="contact-checkbox-window" class="checkbox-window">
+                                <div class="checkbox-container">
+                                    <button type="button" id="contact-checkbox" class="checkbox"></button>
+                                </div>
+                                <p class="im-not-a-robot">I'm not a dog</p>
+                                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" class="captcha-logo" alt="reCAPTCHA logo">
+                                <p class="checkbox-desc"><a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a> - <a href="https://www.google.com/intl/en/policies/terms/">Terms</a></p>
+                                <div class="spinner" id="contact-spinner"></div>
+                            </div>
+
+                            <div id="contact-verify-window" class="verify-window">
+                                <div class="verify-container">
+                                    <header class="verify-header">
+                                        <span class="verify-header-text-medium">Select all images with</span>
+                                        <span class="verify-header-text-big">my stupid chungus dog</span>
+                                    </header>
+                                    <main class="verify-main">
+                                        <div class="captcha-grid">
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="assets/pako1.JPG"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="assets/pako2.JPG"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="assets/pako3.JPG"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="https://picsum.photos/300/300?random=1"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="https://picsum.photos/300/300?random=2"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="https://picsum.photos/300/300?random=3"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="https://picsum.photos/300/300?random=4"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="https://picsum.photos/300/300?random=5"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                            <div class="image-container"><img class="captcha-img contact-captcha-img" alt="captcha" src="https://picsum.photos/300/300?random=6"><img src="assets/checkmark.png" class="checkmark-overlay" alt="Selected"></div>
+                                        </div>
+                                    </main>
+                                    <footer class="verify-footer">
+                                        <div class="verify-footer-left">&nbsp;</div>
+                                        <button type="button" id="contact-verify-button" class="verify-verify-button" disabled>Verify</button>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button type="submit" class="submit-btn">Send</button>
+                    </div>
+                </form>
             </div>
         </section>
     </main>
@@ -698,42 +786,113 @@
         });
 
         // Age guessing game functionality
-        document.querySelectorAll('.age-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const selectedAge = this.getAttribute('data-age');
-                const isCorrect = selectedAge === '11';
-                
-                if (isCorrect) {
-                    this.classList.add('correct');
-                    createConfetti();
-                    showModal('Good job!', 'You must be a genius!');
-                } else {
-                    this.classList.add('wrong');
-                    showModal('Wrong!', 'Come on bruh.');
-                }
-                
-                // Disable all options after selection
-                document.querySelectorAll('.age-option').forEach(opt => {
-                    opt.style.pointerEvents = 'none';
+        let currentPictureIndex = 0;
+        const pictures = [
+            { src: 'assets/doglove.jpg', correctAge: '6', correctText: '6 months and 9 days' },
+            { src: 'assets/doglook.jpg', correctAge: '11', correctText: '11 months and 7 days' },
+            { src: 'assets/dogdrink.jpg', correctAge: '15', correctText: '1 year and 3 months' }
+        ];
+
+        function changePicture() {
+            currentPictureIndex = (currentPictureIndex + 1) % pictures.length;
+            const image = document.getElementById('age-guess-image');
+            image.src = pictures[currentPictureIndex].src;
+            
+            // Update age options for the current picture
+            updateAgeOptions();
+            
+            // Reset the game state
+            document.querySelectorAll('.age-option').forEach(option => {
+                option.classList.remove('correct', 'wrong');
+                option.style.pointerEvents = 'auto';
+            });
+        }
+
+        function updateAgeOptions() {
+            const ageOptionsContainer = document.querySelector('.age-options');
+            const currentPicture = pictures[currentPictureIndex];
+            
+            ageOptionsContainer.innerHTML = '';
+            
+            // Add the obvious wrong choices
+            const wrongChoices = [
+                { age: '1', text: '1 month' },
+                { age: '2', text: '2 months' },
+                { age: '12', text: '1 year' },
+                { age: '120', text: '10 years' }
+            ];
+            
+            const allOptions = [];
+            
+            const correctOption = document.createElement('div');
+            correctOption.className = 'age-option';
+            correctOption.setAttribute('data-age', currentPicture.correctAge);
+            correctOption.textContent = currentPicture.correctText;
+            allOptions.push(correctOption);
+            
+            wrongChoices.forEach(choice => {
+                const option = document.createElement('div');
+                option.className = 'age-option';
+                option.setAttribute('data-age', choice.age);
+                option.textContent = choice.text;
+                allOptions.push(option);
+            });
+            
+            for (let i = allOptions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allOptions[i], allOptions[j]] = [allOptions[j], allOptions[i]];
+            }
+            
+            allOptions.forEach(option => {
+                ageOptionsContainer.appendChild(option);
+            });
+            
+            attachAgeOptionListeners();
+        }
+
+        function attachAgeOptionListeners() {
+            document.querySelectorAll('.age-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedAge = this.getAttribute('data-age');
+                    const isCorrect = selectedAge === pictures[currentPictureIndex].correctAge;
+                    
+                    if (isCorrect) {
+                        this.classList.add('correct');
+                        createConfetti();
+                        showModal('Good job!', 'You must be a genius!');
+                    } else {
+                        this.classList.add('wrong');
+                        showModal('Wrong!', 'Come on bruh.');
+                    }
+                    
+                    // Disable all options after selection
+                    document.querySelectorAll('.age-option').forEach(opt => {
+                        opt.style.pointerEvents = 'none';
+                    });
                 });
             });
-        });
+        }
+
+        // Initialize age options on page load
+        updateAgeOptions();
 
         function createConfetti() {
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 50; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
                 document.body.appendChild(confetti);
                 
                 // Remove confetti after animation
                 setTimeout(() => {
-                    confetti.remove();
-                }, 6000);
+                    if (confetti.parentNode) {
+                        confetti.remove();
+                    }
+                }, 5000);
             }
         }
 
@@ -745,6 +904,15 @@
 
         function closeModal() {
             document.getElementById('age-modal').classList.remove('show');
+            
+            // Check if the last answer was correct, and if so, change the picture
+            const correctOption = document.querySelector('.age-option.correct');
+            if (correctOption) {
+                // Wait a moment for the modal to close, then change the picture
+                setTimeout(() => {
+                    changePicture();
+                }, 300);
+            }
         }
 
         // Close modal when clicking outside
@@ -753,6 +921,196 @@
                 closeModal();
             }
         });
+
+        // ===== Contact CAPTCHA (embedded from captcha.html, scoped and simplified) =====
+        const contactCheckboxWindow = document.getElementById('contact-checkbox-window');
+        const contactCheckboxBtn = document.getElementById('contact-checkbox');
+        const contactSpinner = document.getElementById('contact-spinner');
+        const contactVerifyWindow = document.getElementById('contact-verify-window');
+        const contactVerifyButton = document.getElementById('contact-verify-button');
+        let contactSelectedImages = new Set();
+        let contactCaptchaPassed = false;
+
+        const contactDogImages = [
+            'assets/pako1.JPG','assets/pako2.JPG','assets/pako3.JPG','assets/pako4.JPG','assets/pako5.JPG','assets/pako6.JPG'
+        ];
+        const contactNonDogImages = [
+            'https://picsum.photos/300/300?random=1','https://picsum.photos/300/300?random=2','https://picsum.photos/300/300?random=3',
+            'https://picsum.photos/300/300?random=4','https://picsum.photos/300/300?random=5','https://picsum.photos/300/300?random=6'
+        ];
+
+        function contactShuffle(array){
+            for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]]; }
+            return array;
+        }
+
+        function contactRegenerateImages(){
+            const shuffledDogs = contactShuffle([...contactDogImages]).slice(0,3);
+            const shuffledNon = contactShuffle([...contactNonDogImages]).slice(0,6);
+            const all = contactShuffle([...shuffledDogs, ...shuffledNon]);
+            document.querySelectorAll('.contact-captcha-img').forEach((img, idx)=>{
+                const container = img.parentElement;
+                img.src = all[idx];
+                img.classList.remove('selected');
+                container.classList.remove('selected');
+                img.onclick = ()=> contactToggleImageSelection(img, idx);
+            });
+            contactSelectedImages.clear();
+            contactUpdateVerifyButton();
+        }
+
+        function contactToggleImageSelection(img, idx){
+            const container = img.parentElement;
+            if(contactSelectedImages.has(idx)){
+                contactSelectedImages.delete(idx);
+                img.classList.remove('selected');
+                container.classList.remove('selected');
+            } else {
+                contactSelectedImages.add(idx);
+                img.classList.add('selected');
+                container.classList.add('selected');
+            }
+            contactUpdateVerifyButton();
+        }
+
+        function contactUpdateVerifyButton(){
+            if(contactSelectedImages.size>0){
+                contactVerifyButton.disabled = false;
+                contactVerifyButton.onclick = contactVerifySelection;
+            } else {
+                contactVerifyButton.disabled = true;
+                contactVerifyButton.onclick = null;
+            }
+        }
+
+        function contactShowSpinner(){
+            contactSpinner.style.visibility = 'visible';
+            contactSpinner.style.opacity = '1';
+            contactSpinner.style.animation = 'contact-spin 1s linear infinite';
+        }
+        function contactHideSpinner(){
+            contactSpinner.style.opacity = '0';
+            contactSpinner.style.animation = 'none';
+            setTimeout(()=>{ contactSpinner.style.visibility='hidden'; },300);
+        }
+
+        function contactHideCheckbox(){
+            contactCheckboxBtn.style.width = '4px';
+            contactCheckboxBtn.style.height = '4px';
+            contactCheckboxBtn.style.borderRadius = '50%';
+            contactCheckboxBtn.style.marginLeft = '25px';
+            contactCheckboxBtn.style.marginTop = '33px';
+            contactCheckboxBtn.style.opacity = '0';
+        }
+        function contactShowCheckbox(){
+            contactCheckboxBtn.style.width = '100%';
+            contactCheckboxBtn.style.height = '100%';
+            contactCheckboxBtn.style.borderRadius = '2px';
+            contactCheckboxBtn.style.margin = '21px 0 0 12px';
+            contactCheckboxBtn.style.opacity = '1';
+        }
+
+        function contactShowVerifyWindow(){
+            contactVerifyWindow.style.display = 'block';
+            contactVerifyWindow.style.visibility = 'visible';
+            contactVerifyWindow.style.opacity = '1';
+            const rect = contactCheckboxWindow.getBoundingClientRect();
+            contactVerifyWindow.style.top = (contactCheckboxWindow.offsetTop - 80) + 'px';
+            contactVerifyWindow.style.left = (contactCheckboxWindow.offsetLeft + 54) + 'px';
+        }
+        function contactCloseVerifyWindow(){
+            contactVerifyWindow.style.display = 'none';
+            contactVerifyWindow.style.visibility = 'hidden';
+            contactVerifyWindow.style.opacity = '0';
+            contactShowCheckbox();
+            contactHideSpinner();
+            contactCheckboxBtn.disabled = false;
+        }
+
+        function contactVerifySelection(){
+            const selectedIdx = Array.from(contactSelectedImages);
+            const dogIdx = [];
+            document.querySelectorAll('.contact-captcha-img').forEach((img, idx)=>{
+                const src = img.src;
+                if(contactDogImages.some(p=> src.includes(p))){ dogIdx.push(idx); }
+            });
+            const allDogsSelected = dogIdx.every(i=> selectedIdx.includes(i));
+            const noNonDogs = selectedIdx.every(i=> dogIdx.includes(i));
+            if(allDogsSelected && noNonDogs){
+                contactCaptchaPassed = true;
+                contactCloseVerifyWindow();
+                alert('my dog is currently busy chewing toys... please hit it up later');
+            } else {
+                // reset with new images
+                contactRegenerateImages();
+            }
+        }
+
+        // Open captcha flow
+        if(contactCheckboxBtn){
+            document.addEventListener('click', (evt)=>{
+                const path = evt.composedPath ? evt.composedPath() : [];
+                if(contactVerifyWindow.style.display==='block' && !path.includes(contactVerifyWindow)){
+                    contactCloseVerifyWindow();
+                }
+            });
+            contactCheckboxBtn.addEventListener('click', (e)=>{
+                e.preventDefault();
+                contactCheckboxBtn.disabled = true;
+                contactRegenerateImages();
+                contactHideCheckbox();
+                setTimeout(()=> contactShowSpinner(), 200);
+                setTimeout(()=> contactShowVerifyWindow(), 600);
+            });
+        }
     </script>
+    <style>
+        .contact-section h2 { color: #764ba2; }
+        .contact-content { display: block; }
+        .contact-form .form-row { margin-bottom: 1rem; }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: #764ba2; }
+        .submit-btn {
+            background: #764ba2; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px;
+            cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .submit-btn:hover { background: #5a3a7a; transform: scale(1.03); }
+
+        /* CAPTCHA (scoped under .contact-captcha) */
+        .contact-captcha { position: relative; display: inline-block; }
+        .contact-captcha .checkbox-window { height: 74px; width: 300px; background-color: #f9f9f9; border-radius: 3px; border: 1px solid #d3d3d3; position: relative; }
+        .contact-captcha .checkbox-container { width: 28px; height: 28px; }
+        .contact-captcha .checkbox { background-color: #fff; border-radius: 2px; height: 100%; width: 100%; border: 2px solid #c1c1c1; margin: 21px 0 0 12px; outline: 0; transition: width .5s, height .5s, border-radius .5s, margin-top .5s, margin-left .5s, opacity .7s; }
+        .contact-captcha .checkbox:hover { border: 2px solid #b2b2b2; }
+        .contact-captcha .im-not-a-robot { position: relative; left: 52px; bottom: 3px; font-size: 15px; color: #282727; }
+        .contact-captcha .captcha-logo { position: absolute; right: 8px; top: 8px; width: 40px; height: 45px; }
+        .contact-captcha .checkbox-desc { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); color: #555; font-size: 8px; text-align: center; }
+        .contact-captcha .spinner { position: absolute; top: 22px; left: 12px; height: 30px; width: 30px; border: 3px solid rgba(0,0,0,.1); border-top: 3px solid #333; border-radius: 50%; opacity: 0; visibility: hidden; }
+        @keyframes contact-spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+
+        .contact-captcha .verify-window { position: absolute; z-index: 1000; width: 312px; border: 1px solid #cecece; box-shadow: 5px 6px 7px -3px rgba(0,0,0,.12); opacity: 0; visibility: hidden; background-color: white; }
+        .contact-captcha .verify-header { background-color: #1a73e8; padding: 16px; color: #fff; }
+        .contact-captcha .verify-header-text-medium { font-size: 16px; display: block; }
+        .contact-captcha .verify-header-text-big { font-size: 20px; font-weight: 700; display: block; }
+        .contact-captcha .verify-main { padding: 8px; }
+        .contact-captcha .captcha-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+        .contact-captcha .captcha-img { width: 100%; height: 100px; object-fit: cover; border: 2px solid transparent; transition: border-color 0.2s ease, transform 0.2s ease; }
+        .contact-captcha .captcha-img:hover { border-color: #1a73e8; }
+        .contact-captcha .captcha-img.selected { transform: scale(0.7); }
+        .contact-captcha .image-container { position: relative; display: inline-block; }
+        .contact-captcha .checkmark-overlay { position: absolute; top: 5px; left: 5px; width: 20px; height: 20px; z-index: 10; opacity: 0; transition: opacity 0.2s ease; }
+        .contact-captcha .image-container.selected .checkmark-overlay { opacity: 1; }
+        .contact-captcha .verify-footer { border-top: 1px solid #cecece; padding: 10px 7px; color: #737373; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .contact-captcha .verify-verify-button { text-transform: uppercase; background-color: #5a89e2; color: #fff; text-align: center; width: 100%; padding: 12px 0; font-weight: 600; border-radius: 3px; font-size: 14px; border: none; outline: 0; cursor: not-allowed; }
+        .contact-captcha .verify-verify-button:enabled { background-color: #1a73e8; cursor: pointer; }
+        .contact-captcha .verify-verify-button:enabled:hover { background-color: #1557b0; }
+    </style>
 </body>
 </html>
